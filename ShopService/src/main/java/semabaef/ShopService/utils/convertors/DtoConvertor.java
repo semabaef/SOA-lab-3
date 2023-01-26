@@ -5,8 +5,6 @@ import org.springframework.stereotype.Component;
 import semabaef.ShopService.models.document.Vehicle;
 import semabaef.ShopService.models.dto.vehicle.VehicleDTO;
 
-import java.time.LocalDateTime;
-
 @Component
 public class DtoConvertor {
 

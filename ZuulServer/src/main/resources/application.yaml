@@ -1,0 +1,54 @@
+spring:
+  main:
+    allow-circular-references: true
+  application:
+    name: zuul-proxy-server
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    hostname: localhost
+
+ribbon:
+  ConnectTimeout: 30000
+  ReadTimeout: 990000
+  maxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+  eureka:
+    enabled: true
+
+zuul:
+  routes:
+    shop-service:
+      path: /shop/**
+      service-id: shop-service
+      strip-prefix: false
+  host:
+    socket-timeout-millis: 30000
+
+  ribbon:
+    eager-load:
+      enabled: true
+  ribbon-isolation-strategy: semaphore
+
+shop-service:
+  ribbon:
+    listOfServers: http://localhost:6363/shop, http://localhost:6365/shop
+
+server:
+#  ssl:
+#    key-store: ./ssl/server.keystore
+#    key-store-password: secret
+#    key-store-type: JKS
+#    key-alias: localhost
+#    key-password: secret
+#    trust-store: ./ssl/server.truststore
+#    trust-store-password: secret
+
+  port: 8762
+
+
